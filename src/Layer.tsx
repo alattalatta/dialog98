@@ -1,22 +1,33 @@
+import type { CSS } from '@stitches/react'
 import { styled } from '@stitches/react'
 
-const Layer = styled('div', {
+import { fakeBorder } from './lib/fakeBorder'
+
+const baseCSS: CSS = {
   border: '1px solid',
   padding: 1,
+}
+
+const insetCSS: CSS = {
+  borderColor: '#7b7b7b',
+  borderRightColor: '#fff',
+  borderBottomColor: '#fff',
+  boxShadow: fakeBorder('#000', '#c2c2c2'),
+}
+
+const outsetCSS: CSS = {
+  borderColor: '#fff',
+  borderRightColor: '#000',
+  borderBottomColor: '#000',
+  boxShadow: fakeBorder('#c2c2c2', '#7b7b7b'),
+}
+
+const Layer = styled('div', {
+  ...baseCSS,
   variants: {
     depth: {
-      inset: {
-        borderColor: '#7b7b7b',
-        borderRightColor: '#fff',
-        borderBottomColor: '#fff',
-        boxShadow: 'inset 1px 1px #000, inset -1px -1px #c2c2c2',
-      },
-      outset: {
-        borderColor: '#fff',
-        borderRightColor: '#000',
-        borderBottomColor: '#000',
-        boxShadow: 'inset 1px 1px #c2c2c2, inset -1px -1px #7b7b7b',
-      },
+      inset: insetCSS,
+      outset: outsetCSS,
     },
   },
   defaultVariants: {
@@ -24,4 +35,5 @@ const Layer = styled('div', {
   },
 })
 
+export { baseCSS, insetCSS, outsetCSS }
 export default Layer

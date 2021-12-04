@@ -1,6 +1,8 @@
 import type { CSS } from '@stitches/react'
 import { styled } from '@stitches/react'
 
+import { fakeBorder } from './lib/fakeBorder'
+
 type Props = {
   active?: boolean
   as?: keyof JSX.IntrinsicElements
@@ -16,7 +18,7 @@ const FrameRoot = styled('article', {
   border: '1px solid #c2c2c2',
   borderRightColor: '#000',
   borderBottomColor: '#000',
-  boxShadow: 'inset 1px 1px #fff, inset -1px -1px #7b7b7b',
+  boxShadow: fakeBorder('#fff', '#7b7b7b'),
   userSelect: 'none',
   variants: {
     type: {
