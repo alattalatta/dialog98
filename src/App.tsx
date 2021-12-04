@@ -1,11 +1,14 @@
+import { useState } from 'react'
+
 import Renderer from './Renderer'
 import Button from './lib/98/Button'
 import Frame from './lib/98/Frame'
 import Layer from './lib/98/Layer'
-import Body from './render/Body'
+import Textfield from './lib/98/Textfield'
 import Dialog from './render/Dialog'
 
 const App: React.VFC = () => {
+  const [content, setContent] = useState('')
   return (
     <Frame
       css={{ maxWidth: 800, margin: '300px auto 0' }}
@@ -16,10 +19,11 @@ const App: React.VFC = () => {
       <div style={{ margin: '8px 8px 0' }}>
         <Layer css={{ background: '#fff' }} depth="inset">
           <Renderer css={{ height: 300 }}>
-            <Dialog />
+            <Dialog title="프린터 설정 오류">{content}</Dialog>
           </Renderer>
         </Layer>
       </div>
+      <Textfield value={content} onChange={(e) => setContent(e.target.value)} />
       <div style={{ display: 'flex', justifyContent: 'center', margin: '12px 0' }}>
         <Button>확인</Button>
         <Button disabled>취소</Button>

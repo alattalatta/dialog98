@@ -7,12 +7,9 @@ type Props = {
   width: number
 }
 
-const Frame: React.VFC<Props> = ({ height: h, width: w }) => {
+const Frame: React.VFC<Props> = ({ height, width }) => {
   const draw = useCallback(
     (ctx: GraphicsPixi) => {
-      const width = w + 64 + 16
-      const height = h + 36 + 55
-
       ctx.clear()
 
       // base
@@ -42,7 +39,7 @@ const Frame: React.VFC<Props> = ({ height: h, width: w }) => {
         .lineTo(width - 1, height - 1)
         .lineTo(width - 1, 1)
     },
-    [h, w],
+    [height, width],
   )
 
   return <Graphics draw={draw} />
