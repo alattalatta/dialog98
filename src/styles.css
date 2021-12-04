@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: none;
+}
+
+body {
+  height: 100vh;
+  background: #007d7b;
+  font-family: Gulim, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  margin: 0;
+}

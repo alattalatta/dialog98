@@ -1589,6 +1589,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stitches/react@npm:^1.2.6":
+  version: 1.2.6
+  resolution: "@stitches/react@npm:1.2.6"
+  peerDependencies:
+    react: ">= 16.3.0"
+  checksum: 416088cdde17a22d6cdb04cf1cf756c6e5fc291dd7e41f82ce422bb95432ad32b6d990e7264d996d367c40bbc674d61be087e4e1f7b23eea7f81ef6266373a9c
+  languageName: node
+  linkType: hard
+
 "@swc/helpers@npm:^0.2.11":
   version: 0.2.14
   resolution: "@swc/helpers@npm:0.2.14"
@@ -3084,6 +3093,7 @@ __metadata:
   dependencies:
     "@alattalatta/eslint-config": ^0.3.0
     "@alattalatta/prettier-config": ^0.2.0
+    "@stitches/react": ^1.2.6
     "@types/pixi.js": ^5.0.0
     "@types/react": ^17.0.37
     "@types/react-dom": ^17.0.11
