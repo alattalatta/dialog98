@@ -16,11 +16,9 @@ const style = new TextStyle({
   fontSize: 12,
 })
 
-const TitleBar: React.VFC<Props> = ({ children, width: w, ...props }) => {
+const TitleBar: React.VFC<Props> = ({ children, closeButton, icon, width, ...props }) => {
   const draw = useCallback(
     (ctx: GraphicsPixi) => {
-      const width = w + 64 + 16
-
       ctx
         .clear()
         .beginFill(0x000081)
@@ -31,7 +29,7 @@ const TitleBar: React.VFC<Props> = ({ children, width: w, ...props }) => {
         .lineTo(0, 0)
         .endFill()
     },
-    [w],
+    [width],
   )
 
   return (
