@@ -18,7 +18,7 @@ const Dialog: React.VFC = () => {
   return (
     <Container x={8} y={8}>
       <Frame {...bodyDim} />
-      <TitleBar icon={internetConnection.href} width={fullWidth - 6} x={3} y={3}>
+      <TitleBar closeButton="disabled" icon={internetConnection.href} width={fullWidth - 6} x={3} y={3}>
         프린터 설정 오류
       </TitleBar>
       <Sprite image={error.href} roundPixels x={17} y={33} />

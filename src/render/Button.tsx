@@ -6,7 +6,7 @@ import { useCallback, useMemo } from 'react'
 
 import { BUTTON_HEIGHT, BUTTON_WIDTH } from './constants'
 
-const focusOverlay = new URL('../focus-overlay.png', import.meta.url)
+const focusOverlay = new URL('./focus-overlay.png', import.meta.url)
 
 type Props = {
   children: string
