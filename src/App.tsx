@@ -13,6 +13,8 @@ const App: React.VFC = () => {
       <div>
         <p>Hello, World!</p>
         <Input defaultValue="Hello, World!" type="text" />
+        <Input defaultValue="Hello, World!" disabled type="text" />
+        <Input defaultValue="Hello, World!" readOnly type="text" />
       </div>
       <Button>확인</Button>
       <Button disabled>취소</Button>

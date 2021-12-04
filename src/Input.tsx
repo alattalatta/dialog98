@@ -21,6 +21,13 @@ const InputField = styled('input', {
   '&:focus': {
     outline: 'none',
   },
+  '&:disabled, &:read-only': {
+    background: '#c2c2c2',
+  },
+  '&:disabled': {
+    color: '#7b7b7b',
+    userSelect: 'none',
+  },
 })
 
 const Input: React.VFC<Omit<JSX.IntrinsicElements['input'], 'ref'>> = (props) => {
