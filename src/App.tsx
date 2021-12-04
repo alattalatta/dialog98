@@ -1,7 +1,7 @@
-import Button from './Button'
-import Frame from './Frame'
-import Input from './Input'
-import Layer from './Layer'
+import Button from './lib/98/Button'
+import Frame from './lib/98/Frame'
+import Input from './lib/98/Input'
+import Layer from './lib/98/Layer'
 
 const App: React.VFC = () => {
   return (
@@ -12,8 +12,7 @@ const App: React.VFC = () => {
       type="dialog"
     >
       <div style={{ margin: '8px 8px 0' }}>
-        <p>Hello, World!</p>
-        <Layer css={{ padding: 12 }}>
+        <Layer css={{ background: '#fff' }} depth="inset">
           <Input defaultValue="Hello, World!" type="text" />
           <Input defaultValue="Hello, World!" disabled type="text" />
           <Input defaultValue="Hello, World!" readOnly type="text" />

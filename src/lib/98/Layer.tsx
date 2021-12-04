@@ -1,7 +1,7 @@
 import type { CSS } from '@stitches/react'
 import { styled } from '@stitches/react'
 
-import { fakeBorder } from './lib/fakeBorder'
+import { fakeBorder } from '../fakeBorder'
 
 const baseCSS: CSS = {
   border: '1px solid',
