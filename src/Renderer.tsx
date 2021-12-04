@@ -35,7 +35,7 @@ const Renderer: React.FC<{ css?: CSS }> = ({ children, css }) => {
       {mounted && (
         <Stage
           {...dim}
-          options={{ backgroundColor: 0xffddcc, resizeTo: hostRef.current || undefined }}
+          options={{ backgroundAlpha: 0, resizeTo: hostRef.current || undefined }}
           raf={false}
           onMount={(app) => (appRef.current = app)}
         >
