@@ -8,12 +8,15 @@
   color: #fff;
 }
 
+html {
+  font-size: 12px;
+}
+
 body {
   height: 100vh;
   background: #007d7b;
   border-top: 1px solid transparent;
   font-family: Gulim, sans-serif;
-  font-size: 12px;
   line-height: 1;
   margin: 0;
 }
