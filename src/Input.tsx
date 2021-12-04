@@ -1,18 +1,12 @@
 import { styled } from '@stitches/react'
 
-const InputRoot = styled('div', {
-  height: 21,
-  border: '1px solid #7b7b7b',
-  borderRightColor: '#fff',
-  borderBottomColor: '#fff',
-})
+import Layer from './Layer'
 
 const InputField = styled('input', {
   width: '100%',
   height: '100%',
-  border: '1px solid #000',
-  borderRightColor: '#c2c2c2',
-  borderBottomColor: '#c2c2c2',
+  background: '#fff',
+  border: 'none',
   display: 'block',
   fontFamily: 'inherit',
   fontSize: '12px',
@@ -26,15 +20,14 @@ const InputField = styled('input', {
   },
   '&:disabled': {
     color: '#7b7b7b',
-    userSelect: 'none',
   },
 })
 
 const Input: React.VFC<Omit<JSX.IntrinsicElements['input'], 'ref'>> = (props) => {
   return (
-    <InputRoot>
+    <Layer css={{ height: 21 }} depth="inset">
       <InputField {...props} />
-    </InputRoot>
+    </Layer>
   )
 }
 
