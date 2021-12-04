@@ -7,7 +7,7 @@ import Buttons from './Buttons'
 import Frame from './Frame'
 import TitleBar from './TitleBar'
 
-const ErrorIcon = new URL('../msg_error-0.png', import.meta.url)
+const errorIcon = new URL('../msg_error-0.png', import.meta.url)
 
 const Dialog: React.VFC = () => {
   const [dim, setDim] = useState<{ height: number; width: number }>({ height: 0, width: 0 })
@@ -18,7 +18,7 @@ const Dialog: React.VFC = () => {
       <TitleBar width={dim.width - 6} x={3} y={3}>
         프린터 설정 오류
       </TitleBar>
-      <Sprite image={ErrorIcon.href} x={17} y={33} />
+      <Sprite image={errorIcon.href} x={17} y={33} />
       <Body
         maxWidth={550}
         onMount={setDim}
