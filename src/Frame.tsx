@@ -16,20 +16,15 @@ const FrameRoot = styled('article', {
   border: '1px solid #c2c2c2',
   borderRightColor: '#000',
   borderBottomColor: '#000',
+  boxShadow: 'inset 1px 1px #fff, inset -1px -1px #7b7b7b',
   userSelect: 'none',
-})
-
-const FrameContainer = styled('div', {
-  border: '1px solid #fff',
-  borderRightColor: '#7b7b7b',
-  borderBottomColor: '#7b7b7b',
   variants: {
     type: {
       dialog: {
-        padding: '1px',
+        padding: '2px',
       },
       window: {
-        padding: '2px',
+        padding: '3px',
       },
     },
   },
@@ -68,14 +63,12 @@ const Title = styled('h1', {
 
 const Frame: React.FC<Props> = ({ active = true, children, as, css, icon, level = 1, title, type }) => {
   return (
-    <FrameRoot as={as} css={css}>
-      <FrameContainer type={type}>
-        <TitleBar active={active}>
-          {icon && <Icon alt="" src={icon} />}
-          <Title as={`h${level}`}>{title}</Title>
-        </TitleBar>
-        {children}
-      </FrameContainer>
+    <FrameRoot as={as} css={css} type={type}>
+      <TitleBar active={active}>
+        {icon && <Icon alt="" src={icon} />}
+        <Title as={`h${level}`}>{title}</Title>
+      </TitleBar>
+      {children}
     </FrameRoot>
   )
 }
