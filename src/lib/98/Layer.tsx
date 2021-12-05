@@ -43,5 +43,5 @@ const Layer = styled('div', {
   },
 })
 
-export { baseCSS, insetCSS, outsetCSS }
+export { baseCSS, insetCSS, outsetCSS, shallowCSS }
 export default Layer

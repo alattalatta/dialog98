@@ -3,9 +3,11 @@ import { useState } from 'react'
 
 import Renderer from './Renderer'
 import Button from './lib/98/Button'
+import Checkbox from './lib/98/Checkbox'
 import Frame from './lib/98/Frame'
 import Input_ from './lib/98/Input'
 import Layer from './lib/98/Layer'
+import Radio from './lib/98/Radio'
 import Textfield from './lib/98/Textfield'
 import type { ButtonProps } from './render/Dialog'
 import Dialog from './render/Dialog'
@@ -108,15 +110,14 @@ const App: React.VFC = () => {
                   />
                 </InputSet>
                 <InputSet>
-                  <input
+                  <Checkbox
                     checked={button.disabled}
                     id={`disabled-${index}`}
-                    type="checkbox"
+                    label="비활성"
                     onChange={(e) =>
                       setButtons(buttons.map((b, i) => (i === index ? { ...b, disabled: e.target.checked } : b)))
                     }
                   />
-                  <label htmlFor={`disabled-${index}`}>비활성화</label>
                 </InputSet>
                 <Button
                   css={{ marginTop: 8 }}
