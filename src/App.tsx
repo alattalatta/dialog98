@@ -57,7 +57,7 @@ const App: React.VFC = () => {
     >
       <div style={{ margin: '8px 8px 12px' }}>
         <Layer css={{ background: '#fff' }} depth="inset">
-          <Renderer css={{ height: 300 }}>
+          <Renderer css={{ height: 180 }}>
             <Dialog buttons={buttons} image={image} title={title}>
               {content}
             </Dialog>
@@ -87,7 +87,7 @@ const App: React.VFC = () => {
           <Layer as="fieldset" css={{ flexGrow: 1, margin: 0, padding: 12 }} depth="shallow">
             <Legend>버튼</Legend>
             {buttons.map((button, index) => (
-              <Layer key={index} as="fieldset" css={{ margin: '8px 0 0', padding: 8 }} depth="shallow">
+              <Layer key={index} as="fieldset" css={{ margin: '8px 0 0', padding: 12 }} depth="shallow">
                 <Legend>{button.label || `${index + 1}번`}</Legend>
                 <InputSet>
                   <label htmlFor={`label-${index}`}>레이블</label>
@@ -129,8 +129,28 @@ const App: React.VFC = () => {
                 </Button>
               </Layer>
             ))}
-            <Button css={{ marginTop: 8 }} type="button" onClick={addButton}>
-              추가
+            <div style={{ marginTop: 12 }}>
+              <label htmlFor="focus" style={{ display: 'block' }}>
+                포커스
+              </label>
+              <select
+                id="focus"
+                style={{ width: '50%', marginTop: 8 }}
+                value={buttons.findIndex(({ disabled, focused }) => focused && !disabled)}
+                onChange={(e) => setButtons(buttons.map((b, i) => ({ ...b, focused: parseInt(e.target.value) === i })))}
+              >
+                <option key={-1} value={-1}>
+                  (없음)
+                </option>
+                {buttons.map(({ disabled, label }, index) => (
+                  <option key={index} disabled={disabled} value={index}>
+                    {label || `${index + 1}번`}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <Button css={{ marginTop: 12 }} type="button" onClick={addButton}>
+              버튼 추가
             </Button>
           </Layer>
         </Layer>
