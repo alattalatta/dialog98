@@ -14,7 +14,7 @@ const InputField = styled('textarea', {
   lineHeight: 1,
   margin: 0,
   padding: '1px 1px 4px',
-  resize: 'vertical',
+  resize: 'none',
   '&:focus': {
     outline: 'none',
   },

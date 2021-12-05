@@ -28,13 +28,23 @@ const Input = styled(Input_, {
 const App: React.VFC = () => {
   const [title, setTitle] = useState('프린터 설정 오류')
   const [content, setContent] = useState('갑수갑수김상수박박쓰')
+  const [image, setImage] = useState(new URL('./render/error.png', import.meta.url).href)
   const [buttons, setButtons] = useState<ButtonProps[]>([
     {
       label: '확인',
       shortcut: 'Y',
+      disabled: false,
       focused: true,
     },
   ])
+
+  const addButton = (): void => {
+    setButtons([...buttons, { label: '', shortcut: '', disabled: false, focused: false }])
+    window.setTimeout(() => {
+      const buttonCount = buttons.length
+      document.getElementById(`label-${buttonCount}`)?.focus()
+    })
+  }
 
   return (
     <Frame
@@ -46,7 +56,7 @@ const App: React.VFC = () => {
       <div style={{ margin: '8px 8px 12px' }}>
         <Layer css={{ background: '#fff' }} depth="inset">
           <Renderer css={{ height: 300 }}>
-            <Dialog buttons={buttons} title={title}>
+            <Dialog buttons={buttons} image={image} title={title}>
               {content}
             </Dialog>
           </Renderer>
@@ -61,18 +71,22 @@ const App: React.VFC = () => {
             <InputSet>
               <label htmlFor="content">내용</label>
               <Textfield
-                css={{ height: 48, marginTop: 8 }}
+                css={{ height: 128, marginTop: 8 }}
                 id="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
+            </InputSet>
+            <InputSet>
+              <label htmlFor="image">이미지 (32×32)</label>
+              <Input id="image" value={image} onChange={(e) => setImage(e.target.value)} />
             </InputSet>
           </Layer>
           <Layer as="fieldset" css={{ flexGrow: 1, margin: 0, padding: 12 }} depth="shallow">
             <Legend>버튼</Legend>
             {buttons.map((button, index) => (
               <Layer key={index} as="fieldset" css={{ margin: '8px 0 0', padding: 8 }} depth="shallow">
-                <Legend>버튼 {index + 1}</Legend>
+                <Legend>{button.label || `${index + 1}번`}</Legend>
                 <InputSet>
                   <label htmlFor={`label-${index}`}>레이블</label>
                   <Input
@@ -98,26 +112,23 @@ const App: React.VFC = () => {
                     checked={button.disabled}
                     id={`disabled-${index}`}
                     type="checkbox"
-                    onClick={() =>
-                      setButtons(buttons.map((b, i) => (i === index ? { ...b, disabled: !button.disabled } : b)))
+                    onChange={(e) =>
+                      setButtons(buttons.map((b, i) => (i === index ? { ...b, disabled: e.target.checked } : b)))
                     }
                   />
                   <label htmlFor={`disabled-${index}`}>비활성화</label>
                 </InputSet>
                 <Button
                   css={{ marginTop: 8 }}
+                  disabled={buttons.length === 1}
                   type="button"
                   onClick={() => setButtons(buttons.filter((_, i) => i !== index))}
                 >
-                  삭제
+                  {button.label || `${index + 1}번`} 버튼 삭제
                 </Button>
               </Layer>
             ))}
-            <Button
-              css={{ marginTop: 8 }}
-              type="button"
-              onClick={() => setButtons([...buttons, { label: '', shortcut: '' }])}
-            >
+            <Button css={{ marginTop: 8 }} type="button" onClick={addButton}>
               추가
             </Button>
           </Layer>

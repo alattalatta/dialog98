@@ -16,10 +16,11 @@ export type ButtonProps = Omit<ButtonProps_, 'children'> & { label: string }
 type Props = {
   buttons: readonly ButtonProps[]
   children: string
+  image: string
   title: string
 }
 
-const Dialog: React.VFC<Props> = ({ buttons, children, title }) => {
+const Dialog: React.VFC<Props> = ({ buttons, image, children, title }) => {
   const style = useMemo(
     () =>
       new TextStyle({
@@ -43,7 +44,7 @@ const Dialog: React.VFC<Props> = ({ buttons, children, title }) => {
       <TitleBar closeButton="disabled" icon={internetConnection.href} width={fullWidth - 6} x={3} y={3}>
         {title}
       </TitleBar>
-      <Body x={3} y={33}>
+      <Body image={image} x={3} y={33}>
         {children}
       </Body>
       <Buttons x={fullWidth / 2} y={bodyHeight + 56}>
