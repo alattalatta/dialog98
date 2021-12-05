@@ -1,3 +1,4 @@
+import type { CSS } from '@stitches/react'
 import { styled } from '@stitches/react'
 
 import Layer from './Layer'
@@ -25,12 +26,12 @@ const InputField = styled('textarea', {
   },
 })
 
-const Input: React.VFC<Omit<JSX.IntrinsicElements['textarea'], 'ref'>> = (props) => {
+const Textfield: React.VFC<Omit<JSX.IntrinsicElements['textarea'], 'ref'> & { css?: CSS }> = ({ css, ...props }) => {
   return (
-    <Layer depth="inset">
+    <Layer css={css} depth="inset">
       <InputField {...props} />
     </Layer>
   )
 }
 
-export default Input
+export default Textfield

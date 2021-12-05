@@ -22,12 +22,20 @@ const outsetCSS: CSS = {
   boxShadow: fakeBorder('#c2c2c2', '#7b7b7b'),
 }
 
+const shallowCSS: CSS = {
+  borderColor: '#7b7b7b',
+  borderRightColor: '#fff',
+  borderBottomColor: '#fff',
+  boxShadow: fakeBorder('#fff', '#7b7b7b'),
+}
+
 const Layer = styled('div', {
   ...baseCSS,
   variants: {
     depth: {
       inset: insetCSS,
       outset: outsetCSS,
+      shallow: shallowCSS,
     },
   },
   defaultVariants: {

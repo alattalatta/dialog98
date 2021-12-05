@@ -3,6 +3,7 @@ import { TextMetrics, TextStyle } from 'pixi.js'
 import { useMemo } from 'react'
 
 import Body from './Body'
+import type { Props as ButtonProps_ } from './Button'
 import Button from './Button'
 import Buttons from './Buttons'
 import Frame from './Frame'
@@ -10,12 +11,15 @@ import TitleBar from './TitleBar'
 
 const internetConnection = new URL('./internet_connection.png', import.meta.url)
 
+export type ButtonProps = Omit<ButtonProps_, 'children'> & { label: string }
+
 type Props = {
+  buttons: readonly ButtonProps[]
   children: string
   title: string
 }
 
-const Dialog: React.VFC<Props> = ({ children, title }) => {
+const Dialog: React.VFC<Props> = ({ buttons, children, title }) => {
   const style = useMemo(
     () =>
       new TextStyle({
@@ -43,8 +47,11 @@ const Dialog: React.VFC<Props> = ({ children, title }) => {
         {children}
       </Body>
       <Buttons x={fullWidth / 2} y={bodyHeight + 56}>
-        <Button shortcut="Y">예</Button>
-        <Button shortcut="N">아니오</Button>
+        {buttons.map((props, index) => (
+          <Button key={index} {...props}>
+            {props.label}
+          </Button>
+        ))}
       </Buttons>
     </Container>
   )

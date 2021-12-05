@@ -1,3 +1,4 @@
+import type { CSS } from '@stitches/react'
 import { styled } from '@stitches/react'
 
 import Layer from './Layer'
@@ -23,9 +24,13 @@ const InputField = styled('input', {
   },
 })
 
-const Input: React.VFC<Omit<JSX.IntrinsicElements['input'], 'ref'>> = (props) => {
+const Input: React.VFC<Omit<JSX.IntrinsicElements['input'], 'ref'> & { css?: CSS }> = ({
+  className,
+  css,
+  ...props
+}) => {
   return (
-    <Layer css={{ height: 21 }} depth="inset">
+    <Layer className={className} css={{ height: 21, ...css }} depth="inset">
       <InputField {...props} />
     </Layer>
   )

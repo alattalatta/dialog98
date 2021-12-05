@@ -8,25 +8,14 @@ import { BUTTON_HEIGHT, BUTTON_WIDTH } from './constants'
 
 const focusOverlay = new URL('./focus-overlay.png', import.meta.url)
 
-type Props = {
+export type Props = {
   children: string
+  disabled?: boolean
+  focused?: boolean
   shortcut?: string
   x?: number
   y?: number
-} & (
-  | {
-      disabled?: never
-      focused?: never
-    }
-  | {
-      disabled?: never
-      focused: boolean
-    }
-  | {
-      disabled: boolean
-      focused?: never
-    }
-)
+}
 
 type LabelProps = {
   children: string
@@ -71,7 +60,7 @@ const Label: React.VFC<LabelProps> = ({ children, fill, shortcut, x = 0, y = 0 }
   return (
     <Container x={x} y={y}>
       <Text roundPixels style={style} text={children} x={labelX} />
-      {shortcut && (
+      {!!shortcut && (
         <Container x={shortcutX}>
           <Text roundPixels style={style} text={`(${shortcut})`} />
           <Graphics draw={underline} />
@@ -146,7 +135,7 @@ const Button: React.VFC<Props> = ({ children, shortcut, x = 0, y = 0, ...state }
           {children}
         </Label>
       </Container>
-      {state.focused && <Sprite image={focusOverlay.href} roundPixels />}
+      {!state.disabled && state.focused && <Sprite image={focusOverlay.href} roundPixels />}
     </Container>
   )
 }
