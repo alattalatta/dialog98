@@ -29,6 +29,7 @@ const Input = styled(Input_, {
 
 const App: React.VFC = () => {
   const [title, setTitle] = useState('프린터 설정 오류')
+  const [icon, setIcon] = useState(new URL('./render/internet_connection.png', import.meta.url).href)
   const [content, setContent] = useState('갑수갑수김상수박박쓰')
   const [image, setImage] = useState(new URL('./render/error.png', import.meta.url).href)
   const [buttons, setButtons] = useState<ButtonProps[]>([
@@ -58,7 +59,7 @@ const App: React.VFC = () => {
       <div style={{ margin: '8px 8px 12px' }}>
         <Layer css={{ background: '#fff' }} depth="inset">
           <Renderer css={{ height: 180 }}>
-            <Dialog buttons={buttons} image={image} title={title}>
+            <Dialog buttons={buttons} icon={icon} image={image} title={title}>
               {content}
             </Dialog>
           </Renderer>
@@ -67,8 +68,12 @@ const App: React.VFC = () => {
           <Layer as="fieldset" css={{ flexGrow: 1, padding: 12 }} depth="shallow">
             <Legend>텍스트</Legend>
             <InputSet>
-              <label htmlFor="title">대화상자 제목</label>
+              <label htmlFor="title">제목</label>
               <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+            </InputSet>
+            <InputSet>
+              <label htmlFor="icon">아이콘 (16×16)</label>
+              <Input id="icon" value={icon} onChange={(e) => setIcon(e.target.value)} />
             </InputSet>
             <InputSet>
               <label htmlFor="content">내용</label>

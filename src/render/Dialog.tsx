@@ -9,18 +9,17 @@ import Buttons from './Buttons'
 import Frame from './Frame'
 import TitleBar from './TitleBar'
 
-const internetConnection = new URL('./internet_connection.png', import.meta.url)
-
 export type ButtonProps = Omit<ButtonProps_, 'children'> & { label: string }
 
 type Props = {
   buttons: readonly ButtonProps[]
   children: string
+  icon: string
   image: string
   title: string
 }
 
-const Dialog: React.VFC<Props> = ({ buttons, image, children, title }) => {
+const Dialog: React.VFC<Props> = ({ buttons, icon, image, children, title }) => {
   const style = useMemo(
     () =>
       new TextStyle({
@@ -41,7 +40,7 @@ const Dialog: React.VFC<Props> = ({ buttons, image, children, title }) => {
   return (
     <Container x={8} y={8}>
       <Frame height={fullHeight} width={fullWidth} />
-      <TitleBar closeButton="disabled" icon={internetConnection.href} width={fullWidth - 6} x={3} y={3}>
+      <TitleBar closeButton="disabled" icon={icon} width={fullWidth - 6} x={3} y={3}>
         {title}
       </TitleBar>
       <Body image={image} x={3} y={33}>
