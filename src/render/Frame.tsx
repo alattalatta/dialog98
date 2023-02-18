@@ -1,13 +1,14 @@
-import { Graphics } from '@pixi/react'
+import { Container, Graphics } from '@pixi/react'
 import type { Graphics as GraphicsPixi } from 'pixi.js'
 import { useCallback } from 'react'
 
 type Props = {
+  children?: React.ReactNode
   height: number
   width: number
 }
 
-const Frame: React.FC<Props> = ({ height, width }) => {
+const Frame: React.FC<Props> = ({ children, height, width }) => {
   const draw = useCallback(
     (ctx: GraphicsPixi) => {
       ctx.clear()
@@ -42,7 +43,12 @@ const Frame: React.FC<Props> = ({ height, width }) => {
     [height, width],
   )
 
-  return <Graphics draw={draw} />
+  return (
+    <Container>
+      <Graphics draw={draw} />
+      {children}
+    </Container>
+  )
 }
 
 export default Frame

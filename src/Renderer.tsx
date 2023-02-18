@@ -31,17 +31,19 @@ const Renderer: React.FC<Props> = ({ children, className }) => {
   }, [])
 
   return (
-    <div ref={hostRef} className={clsx(styles.host, className)}>
-      {mounted && (
-        <Stage
-          {...dim}
-          options={{ backgroundAlpha: 0, resizeTo: hostRef.current || undefined }}
-          raf={false}
-          onMount={(app) => (appRef.current = app)}
-        >
-          {children}
-        </Stage>
-      )}
+    <div className={clsx(styles.root, className)}>
+      <div ref={hostRef} className={styles.host}>
+        {mounted && (
+          <Stage
+            {...dim}
+            options={{ backgroundAlpha: 0, resizeTo: hostRef.current || undefined }}
+            raf={false}
+            onMount={(app) => (appRef.current = app)}
+          >
+            {children}
+          </Stage>
+        )}
+      </div>
     </div>
   )
 }

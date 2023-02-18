@@ -10,11 +10,8 @@ type Props = {
 }
 
 const Buttons: React.FC<Props> = ({ children, x, y }) => {
-  const buttonCount = Children.count(children)
-  const totalWidth = BUTTON_WIDTH * buttonCount + BUTTON_GAP * (buttonCount - 1)
-
   return (
-    <Container x={x - totalWidth / 2} y={y}>
+    <Container x={x} y={y}>
       {Children.map(children, (child, index) => (
         <Container x={BUTTON_WIDTH * index + BUTTON_GAP * index}>{child}</Container>
       ))}
