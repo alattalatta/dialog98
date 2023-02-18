@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 
-import { fakeBorder } from '../fakeBorder'
+import { fakeBorder } from './fakeBorder.css'
 
 export const root = recipe({
   base: {

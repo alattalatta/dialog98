@@ -10,6 +10,7 @@ export const textarea = style({
   fontSize: '12px',
   lineHeight: 1,
   margin: 0,
+  overflow: 'hidden',
   padding: '1px 1px 4px',
   resize: 'none',
   selectors: {

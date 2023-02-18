@@ -12,7 +12,8 @@ const Checkbox: React.FC<Props> = ({ className, id: idProp, label, style, ...pro
   const id = idProp ?? `checkbox-${uniqID}`
 
   return (
-    <span className={clsx(styles.root, className)} style={style}>
+    // label role="none" => only for ticker click handling
+    <label className={clsx(styles.root, className)} role="none" style={style}>
       <input className={styles.input} id={id} type="radio" {...props} />
       <img alt="" className={styles.tick} src={tick} />
       {label && (
@@ -20,7 +21,7 @@ const Checkbox: React.FC<Props> = ({ className, id: idProp, label, style, ...pro
           {label}
         </label>
       )}
-    </span>
+    </label>
   )
 }
 

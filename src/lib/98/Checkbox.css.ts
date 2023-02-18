@@ -1,29 +1,31 @@
 import { style } from '@vanilla-extract/css'
 
-import { baseCSS, insetCSS } from './Layer.css'
+import { layering } from './layering.css'
 
 export const root = style({
   display: 'inline-block',
   position: 'relative',
-  selectors: {
-    '&::before': {
-      ...baseCSS,
-      ...insetCSS,
-      content: '""',
-      width: 13,
-      height: 13,
-      background: '#fff',
-      boxSizing: 'border-box',
-      display: 'block',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-    },
-    '&:not(:disabled):active::before': {
-      background: '#c2c2c2',
+})
+
+export const ticker = style([
+  layering({ depth: 'inset' }),
+  {
+    content: '""',
+    width: 13,
+    height: 13,
+    background: '#fff',
+    boxSizing: 'border-box',
+    display: 'block',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    selectors: {
+      [`${root}:active > :not(:disabled) ~ &`]: {
+        background: '#c2c2c2',
+      },
     },
   },
-})
+])
 
 export const input = style({
   width: 0,
@@ -45,7 +47,7 @@ export const tick = style({
   top: 2,
   left: 2,
   selectors: {
-    ':checked + &': {
+    ':checked ~ &': {
       visibility: 'visible',
     },
   },

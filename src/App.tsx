@@ -6,8 +6,8 @@ import Button from './lib/98/Button'
 import Checkbox from './lib/98/Checkbox'
 import Frame from './lib/98/Frame'
 import Input from './lib/98/Input'
-import Layer from './lib/98/Layer'
 import Textfield from './lib/98/Textfield'
+import { layering } from './lib/98/layering.css'
 import type { ButtonProps } from './render/Dialog'
 import Dialog from './render/Dialog'
 
@@ -41,15 +41,18 @@ const App: React.FC = () => {
       type="dialog"
     >
       <div style={{ margin: '8px 8px 12px' }}>
-        <Layer style={{ background: '#fff' }} depth="inset">
+        <div className={layering({ depth: 'inset' })} style={{ background: '#fff' }}>
           <Renderer className={styles.renderingArea}>
             <Dialog buttons={buttons} icon={icon} image={image} title={title}>
               {content}
             </Dialog>
           </Renderer>
-        </Layer>
-        <Layer as="form" style={{ display: 'flex', columnGap: 12, marginTop: 12, padding: 12 }} depth="outset">
-          <Layer as="fieldset" style={{ flexGrow: 1, padding: 12 }} depth="shallow">
+        </div>
+        <form
+          className={layering({ depth: 'outset' })}
+          style={{ display: 'flex', columnGap: 12, marginTop: 12, padding: 12 }}
+        >
+          <fieldset className={styles.formSection}>
             <legend className={styles.legend}>텍스트</legend>
             <div className={styles.inputSet}>
               <label htmlFor="title">제목</label>
@@ -72,15 +75,16 @@ const App: React.FC = () => {
               <label htmlFor="image">이미지 (32×32)</label>
               <Input className={styles.input} id="image" value={image} onChange={(e) => setImage(e.target.value)} />
             </div>
-          </Layer>
-          <Layer as="fieldset" style={{ flexGrow: 1, margin: 0, padding: 12 }} depth="shallow">
+          </fieldset>
+          <fieldset className={styles.formSection}>
             <legend className={styles.legend}>버튼</legend>
             {buttons.map((button, index) => (
-              <Layer key={index} as="fieldset" style={{ margin: '8px 0 0', padding: 12 }} depth="shallow">
+              <fieldset key={index} className={styles.buttonFields}>
                 <legend className={styles.legend}>{button.label || `${index + 1}번`}</legend>
                 <div className={styles.inputSet}>
                   <label htmlFor={`label-${index}`}>레이블</label>
                   <Input
+                    className={styles.input}
                     id={`label-${index}`}
                     value={button.label}
                     onChange={(e) =>
@@ -91,6 +95,7 @@ const App: React.FC = () => {
                 <div className={styles.inputSet}>
                   <label htmlFor={`shortcut-${index}`}>단축키</label>
                   <Input
+                    className={styles.input}
                     id={`shortcut-${index}`}
                     value={button.shortcut}
                     onChange={(e) =>
@@ -116,7 +121,7 @@ const App: React.FC = () => {
                 >
                   {button.label || `${index + 1}번`} 버튼 삭제
                 </Button>
-              </Layer>
+              </fieldset>
             ))}
             <div style={{ marginTop: 12 }}>
               <label htmlFor="focus" style={{ display: 'block' }}>
@@ -141,8 +146,8 @@ const App: React.FC = () => {
             <Button style={{ marginTop: 12 }} type="button" onClick={addButton}>
               버튼 추가
             </Button>
-          </Layer>
-        </Layer>
+          </fieldset>
+        </form>
       </div>
     </Frame>
   )
