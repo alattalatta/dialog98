@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { layering } from './lib/98/layering.css'
+import { layering } from '../lib/98/layering.css'
 
 export const renderingArea = style({
   height: 180,

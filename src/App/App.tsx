@@ -1,32 +1,25 @@
 import { useState } from 'react'
 
 import * as styles from './App.css'
-import Renderer from './Renderer'
-import Button from './lib/98/Button'
-import Checkbox from './lib/98/Checkbox'
-import Frame from './lib/98/Frame'
-import Input from './lib/98/Input'
-import Textfield from './lib/98/Textfield'
-import { layering } from './lib/98/layering.css'
-import type { ButtonProps } from './render/Dialog'
-import Dialog from './render/Dialog'
+import { useButtonReducer } from './useButtonReducer'
+import Renderer from '../Renderer'
+import Button from '../lib/98/Button'
+import Checkbox from '../lib/98/Checkbox'
+import Frame from '../lib/98/Frame'
+import Input from '../lib/98/Input'
+import Textfield from '../lib/98/Textfield'
+import { layering } from '../lib/98/layering.css'
+import Dialog from '../render/Dialog'
 
 const App: React.FC = () => {
   const [title, setTitle] = useState('프린터 설정 오류')
-  const [icon, setIcon] = useState(new URL('./render/internet_connection.png', import.meta.url).href)
+  const [icon, setIcon] = useState(new URL('../render/internet_connection.png', import.meta.url).href)
   const [content, setContent] = useState('갑수갑수김상수박박쓰')
-  const [image, setImage] = useState(new URL('./render/error.png', import.meta.url).href)
-  const [buttons, setButtons] = useState<ButtonProps[]>([
-    {
-      children: '확인',
-      shortcut: 'Y',
-      disabled: false,
-      focused: true,
-    },
-  ])
+  const [image, setImage] = useState(new URL('../render/error.png', import.meta.url).href)
+  const [buttons, buttonsDispatch] = useButtonReducer()
 
   const addButton = (): void => {
-    setButtons([...buttons, { children: '', shortcut: '', disabled: false, focused: false }])
+    buttonsDispatch(['add', { children: '', shortcut: '', disabled: false, focused: false }])
     window.setTimeout(() => {
       const buttonCount = buttons.length
       document.getElementById(`label-${buttonCount}`)?.focus()
@@ -87,11 +80,7 @@ const App: React.FC = () => {
                     className={styles.input}
                     id={`label-${index}`}
                     value={button.children}
-                    onChange={(e) =>
-                      setButtons(
-                        buttons.map((b, i): ButtonProps => (i === index ? { ...b, children: e.target.value } : b)),
-                      )
-                    }
+                    onChange={(e) => buttonsDispatch(['update children', index, e.target.value])}
                   />
                 </div>
                 <div className={styles.inputSet}>
@@ -100,13 +89,7 @@ const App: React.FC = () => {
                     className={styles.input}
                     id={`shortcut-${index}`}
                     value={button.shortcut}
-                    onChange={(e) =>
-                      setButtons(
-                        buttons.map(
-                          (b, i): ButtonProps => (i === index ? { ...b, shortcut: e.target.value[0] || '' } : b),
-                        ),
-                      )
-                    }
+                    onChange={(e) => buttonsDispatch(['update shortcut', index, e.target.value[0] || ''])}
                   />
                 </div>
                 <div className={styles.inputSet}>
@@ -114,18 +97,14 @@ const App: React.FC = () => {
                     checked={button.disabled}
                     id={`disabled-${index}`}
                     label="비활성"
-                    onChange={(e) =>
-                      setButtons(
-                        buttons.map((b, i): ButtonProps => (i === index ? { ...b, disabled: e.target.checked } : b)),
-                      )
-                    }
+                    onChange={(e) => buttonsDispatch(['update disabled', index, e.target.checked])}
                   />
                 </div>
                 <Button
                   disabled={buttons.length === 1}
                   style={{ marginTop: 12 }}
                   type="button"
-                  onClick={() => setButtons(buttons.filter((_, i) => i !== index))}
+                  onClick={() => buttonsDispatch(['remove', index])}
                 >
                   {button.children || `${index + 1}번`} 버튼 삭제
                 </Button>
@@ -139,7 +118,12 @@ const App: React.FC = () => {
                 id="focus"
                 style={{ width: '50%', marginTop: 8 }}
                 value={buttons.findIndex(({ disabled, focused }) => focused && !disabled)}
-                onChange={(e) => setButtons(buttons.map((b, i) => ({ ...b, focused: parseInt(e.target.value) === i })))}
+                onChange={(e) =>
+                  buttonsDispatch(
+                    ['update focus', parseInt(e.target.value)],
+                    // buttons.map((b, i) => ({ ...b, focused: parseInt(e.target.value) === i }))
+                  )
+                }
               >
                 <option key={-1} value={-1}>
                   (없음)
