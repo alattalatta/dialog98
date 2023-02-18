@@ -18,7 +18,7 @@ const App: React.FC = () => {
   const [image, setImage] = useState(new URL('./render/error.png', import.meta.url).href)
   const [buttons, setButtons] = useState<ButtonProps[]>([
     {
-      label: '확인',
+      children: '확인',
       shortcut: 'Y',
       disabled: false,
       focused: true,
@@ -26,7 +26,7 @@ const App: React.FC = () => {
   ])
 
   const addButton = (): void => {
-    setButtons([...buttons, { label: '', shortcut: '', disabled: false, focused: false }])
+    setButtons([...buttons, { children: '', shortcut: '', disabled: false, focused: false }])
     window.setTimeout(() => {
       const buttonCount = buttons.length
       document.getElementById(`label-${buttonCount}`)?.focus()
@@ -80,15 +80,17 @@ const App: React.FC = () => {
             <legend className={styles.legend}>버튼</legend>
             {buttons.map((button, index) => (
               <fieldset key={index} className={styles.buttonFields}>
-                <legend className={styles.legend}>{button.label || `${index + 1}번`}</legend>
+                <legend className={styles.legend}>{button.children || `${index + 1}번`}</legend>
                 <div className={styles.inputSet}>
                   <label htmlFor={`label-${index}`}>레이블</label>
                   <Input
                     className={styles.input}
                     id={`label-${index}`}
-                    value={button.label}
+                    value={button.children}
                     onChange={(e) =>
-                      setButtons(buttons.map((b, i) => (i === index ? { ...b, label: e.target.value } : b)))
+                      setButtons(
+                        buttons.map((b, i): ButtonProps => (i === index ? { ...b, children: e.target.value } : b)),
+                      )
                     }
                   />
                 </div>
@@ -99,7 +101,11 @@ const App: React.FC = () => {
                     id={`shortcut-${index}`}
                     value={button.shortcut}
                     onChange={(e) =>
-                      setButtons(buttons.map((b, i) => (i === index ? { ...b, shortcut: e.target.value[0] || '' } : b)))
+                      setButtons(
+                        buttons.map(
+                          (b, i): ButtonProps => (i === index ? { ...b, shortcut: e.target.value[0] || '' } : b),
+                        ),
+                      )
                     }
                   />
                 </div>
@@ -109,7 +115,9 @@ const App: React.FC = () => {
                     id={`disabled-${index}`}
                     label="비활성"
                     onChange={(e) =>
-                      setButtons(buttons.map((b, i) => (i === index ? { ...b, disabled: e.target.checked } : b)))
+                      setButtons(
+                        buttons.map((b, i): ButtonProps => (i === index ? { ...b, disabled: e.target.checked } : b)),
+                      )
                     }
                   />
                 </div>
@@ -119,7 +127,7 @@ const App: React.FC = () => {
                   type="button"
                   onClick={() => setButtons(buttons.filter((_, i) => i !== index))}
                 >
-                  {button.label || `${index + 1}번`} 버튼 삭제
+                  {button.children || `${index + 1}번`} 버튼 삭제
                 </Button>
               </fieldset>
             ))}
@@ -136,9 +144,9 @@ const App: React.FC = () => {
                 <option key={-1} value={-1}>
                   (없음)
                 </option>
-                {buttons.map(({ disabled, label }, index) => (
+                {buttons.map(({ children, disabled }, index) => (
                   <option key={index} disabled={disabled} value={index}>
-                    {label || `${index + 1}번`}
+                    {children || `${index + 1}번`}
                   </option>
                 ))}
               </select>

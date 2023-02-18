@@ -3,13 +3,11 @@ import { TextMetrics, TextStyle } from 'pixi.js'
 import { useMemo } from 'react'
 
 import Body from './Body'
-import type { Props as ButtonProps_ } from './Button'
+import type { ButtonProps } from './Button'
 import Button from './Button'
 import Buttons from './Buttons'
 import Frame from './Frame'
 import TitleBar from './TitleBar'
-
-export type ButtonProps = Omit<ButtonProps_, 'children'> & { label: string }
 
 type Props = {
   buttons: readonly ButtonProps[]
@@ -48,9 +46,7 @@ const Dialog: React.FC<Props> = ({ buttons, icon, image, children, title }) => {
       </Body>
       <Buttons x={fullWidth / 2} y={bodyHeight + 56}>
         {buttons.map((props, index) => (
-          <Button key={index} {...props}>
-            {props.label}
-          </Button>
+          <Button key={index} {...props} />
         ))}
       </Buttons>
     </Container>
@@ -58,3 +54,4 @@ const Dialog: React.FC<Props> = ({ buttons, icon, image, children, title }) => {
 }
 
 export default Dialog
+export type { ButtonProps }
