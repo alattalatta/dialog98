@@ -5,6 +5,18 @@ import { baseCSS, insetCSS } from './Layer'
 
 type Props = Omit<JSX.IntrinsicElements['input'], 'ref' | 'type'> & { css?: CSS; label: string }
 
+const Checkbox: React.FC<Props> = ({ className, css, id, label, ...props }) => {
+  return (
+    <Root className={className} css={css} role="none">
+      <Input id={id} type="checkbox" {...props} />
+      <Tick alt="" src={tick} />
+      {label && <Label htmlFor={id}>{label}</Label>}
+    </Root>
+  )
+}
+
+export default Checkbox
+
 const tick = new URL('./images/checkbox-tick.svg', import.meta.url).href
 
 const Root = styled('label', {
@@ -58,15 +70,3 @@ const Label = styled('label', {
     outline: '1px dotted #000',
   },
 })
-
-const Checkbox: React.VFC<Props> = ({ className, css, id, label, ...props }) => {
-  return (
-    <Root className={className} css={css} role="none">
-      <Input id={id} type="checkbox" {...props} />
-      <Tick alt="" src={tick} />
-      {label && <Label htmlFor={id}>{label}</Label>}
-    </Root>
-  )
-}
-
-export default Checkbox

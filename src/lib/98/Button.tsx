@@ -1,8 +1,20 @@
 import type { CSS } from '@stitches/react'
 import { styled } from '@stitches/react'
 
-import { fakeBorder } from '../fakeBorder'
 import { baseCSS, outsetCSS } from './Layer'
+import { fakeBorder } from '../fakeBorder'
+
+type Props = Omit<JSX.IntrinsicElements['button'], 'ref'> & { children?: React.ReactNode; css?: CSS }
+
+const Button: React.FC<Props> = ({ children, ...props }) => {
+  return (
+    <ButtonRoot {...props}>
+      <ButtonLabel>{children}</ButtonLabel>
+    </ButtonRoot>
+  )
+}
+
+export default Button
 
 const ButtonRoot = styled('button', {
   ...baseCSS,
@@ -47,13 +59,3 @@ const ButtonLabel = styled('span', {
     transform: 'translateY(1px)',
   },
 })
-
-const Button: React.FC<Omit<JSX.IntrinsicElements['button'], 'ref'> & { css?: CSS }> = ({ children, ...props }) => {
-  return (
-    <ButtonRoot {...props}>
-      <ButtonLabel>{children}</ButtonLabel>
-    </ButtonRoot>
-  )
-}
-
-export default Button

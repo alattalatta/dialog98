@@ -6,12 +6,28 @@ import { fakeBorder } from '../fakeBorder'
 type Props = {
   active?: boolean
   as?: keyof JSX.IntrinsicElements
+  children?: React.ReactNode
   css?: CSS
   icon?: string
   level?: 1 | 2 | 3
   title: string
   type: 'dialog' | 'window'
 }
+
+const Frame: React.FC<Props> = ({ active = true, children, as, css, icon, level = 1, title, type }) => {
+  return (
+    <FrameRoot as={as} css={css} type={type}>
+      <TitleBar active={active}>
+        {icon && <Icon alt="" src={icon} />}
+        <Title as={`h${level}`}>{title}</Title>
+      </TitleBar>
+      {children}
+    </FrameRoot>
+  )
+}
+
+export type { Props }
+export default Frame
 
 const FrameRoot = styled('article', {
   background: '#c2c2c2',
@@ -62,18 +78,3 @@ const Title = styled('h1', {
   margin: 0,
   padding: '2px 0',
 })
-
-const Frame: React.FC<Props> = ({ active = true, children, as, css, icon, level = 1, title, type }) => {
-  return (
-    <FrameRoot as={as} css={css} type={type}>
-      <TitleBar active={active}>
-        {icon && <Icon alt="" src={icon} />}
-        <Title as={`h${level}`}>{title}</Title>
-      </TitleBar>
-      {children}
-    </FrameRoot>
-  )
-}
-
-export type { Props }
-export default Frame

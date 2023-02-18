@@ -1,16 +1,15 @@
-import { Stage } from '@inlet/react-pixi'
+import { Container, Sprite, Stage, Text } from '@pixi/react'
 import type { CSS } from '@stitches/react'
 import { styled } from '@stitches/react'
 import type { Application } from 'pixi.js'
 import { useEffect, useRef, useState } from 'react'
 
-const Host = styled('div', {
-  '& > canvas': {
-    display: 'block',
-  },
-})
+type Props = {
+  children?: React.ReactNode
+  css?: CSS
+}
 
-const Renderer: React.FC<{ css?: CSS }> = ({ children, css }) => {
+const Renderer: React.FC<Props> = ({ children, css }) => {
   const appRef = useRef<Application>()
   const hostRef = useRef<HTMLDivElement>(null)
 
@@ -47,3 +46,9 @@ const Renderer: React.FC<{ css?: CSS }> = ({ children, css }) => {
 }
 
 export default Renderer
+
+const Host = styled('div', {
+  '& > canvas': {
+    display: 'block',
+  },
+})

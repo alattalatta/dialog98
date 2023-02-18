@@ -1,4 +1,4 @@
-import { Graphics } from '@inlet/react-pixi'
+import { Graphics } from '@pixi/react'
 import type { Graphics as GraphicsPixi } from 'pixi.js'
 import { useCallback } from 'react'
 
@@ -7,7 +7,7 @@ type Props = {
   width: number
 }
 
-const Frame: React.VFC<Props> = ({ height, width }) => {
+const Frame: React.FC<Props> = ({ height, width }) => {
   const draw = useCallback(
     (ctx: GraphicsPixi) => {
       ctx.clear()

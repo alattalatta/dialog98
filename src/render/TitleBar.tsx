@@ -1,4 +1,4 @@
-import { Container, Graphics, Sprite, Text } from '@inlet/react-pixi'
+import { Container, Graphics, Sprite, Text } from '@pixi/react'
 import type { Graphics as GraphicsPixi } from 'pixi.js'
 import { TextStyle } from 'pixi.js'
 import { useCallback } from 'react'

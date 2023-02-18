@@ -6,6 +6,18 @@ type Props = Omit<JSX.IntrinsicElements['input'], 'ref' | 'type'> & { css?: CSS;
 const shape = new URL('./images/radio.svg', import.meta.url).href
 const tick = new URL('./images/radio-tick.svg', import.meta.url).href
 
+const Checkbox: React.VFC<Props> = ({ className, css, id, label, ...props }) => {
+  return (
+    <Root className={className} css={css} role="none">
+      <Input id={id} type="radio" {...props} />
+      <Tick alt="" src={tick} />
+      {label && <Label htmlFor={id}>{label}</Label>}
+    </Root>
+  )
+}
+
+export default Checkbox
+
 const Root = styled('label', {
   display: 'inline-block',
   position: 'relative',
@@ -64,15 +76,3 @@ const Label = styled('label', {
     outline: '1px dotted #000',
   },
 })
-
-const Checkbox: React.VFC<Props> = ({ className, css, id, label, ...props }) => {
-  return (
-    <Root className={className} css={css} role="none">
-      <Input id={id} type="radio" {...props} />
-      <Tick alt="" src={tick} />
-      {label && <Label htmlFor={id}>{label}</Label>}
-    </Root>
-  )
-}
-
-export default Checkbox

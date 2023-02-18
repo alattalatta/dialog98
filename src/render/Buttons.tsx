@@ -1,9 +1,10 @@
-import { Container } from '@inlet/react-pixi'
+import { Container } from '@pixi/react'
 import { Children } from 'react'
 
 import { BUTTON_GAP, BUTTON_WIDTH } from './constants'
 
 type Props = {
+  children?: React.ReactNode
   x: number
   y: number
 }

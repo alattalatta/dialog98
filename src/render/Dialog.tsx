@@ -1,4 +1,4 @@
-import { Container } from '@inlet/react-pixi'
+import { Container } from '@pixi/react'
 import { TextMetrics, TextStyle } from 'pixi.js'
 import { useMemo } from 'react'
 
@@ -19,7 +19,7 @@ type Props = {
   title: string
 }
 
-const Dialog: React.VFC<Props> = ({ buttons, icon, image, children, title }) => {
+const Dialog: React.FC<Props> = ({ buttons, icon, image, children, title }) => {
   const style = useMemo(
     () =>
       new TextStyle({

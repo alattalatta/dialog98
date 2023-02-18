@@ -1,4 +1,4 @@
-import { Container, Sprite, Text } from '@inlet/react-pixi'
+import { Container, Sprite, Text } from '@pixi/react'
 import { TextMetrics, TextStyle } from 'pixi.js'
 
 type Props = {
@@ -16,7 +16,7 @@ const style = new TextStyle({
   wordWrapWidth: 550,
 })
 
-const Body: React.VFC<Props> = ({ children, image, x = 0, y = 0 }) => {
+const Body: React.FC<Props> = ({ children, image, x = 0, y = 0 }) => {
   const { height } = TextMetrics.measureText(children, style)
 
   return (

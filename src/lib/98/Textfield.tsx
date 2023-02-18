@@ -3,6 +3,16 @@ import { styled } from '@stitches/react'
 
 import Layer from './Layer'
 
+const Textfield: React.FC<Omit<JSX.IntrinsicElements['textarea'], 'ref'> & { css?: CSS }> = ({ css, ...props }) => {
+  return (
+    <Layer css={css} depth="inset">
+      <InputField {...props} />
+    </Layer>
+  )
+}
+
+export default Textfield
+
 const InputField = styled('textarea', {
   width: '100%',
   height: '100%',
@@ -25,13 +35,3 @@ const InputField = styled('textarea', {
     color: '#7b7b7b',
   },
 })
-
-const Textfield: React.VFC<Omit<JSX.IntrinsicElements['textarea'], 'ref'> & { css?: CSS }> = ({ css, ...props }) => {
-  return (
-    <Layer css={css} depth="inset">
-      <InputField {...props} />
-    </Layer>
-  )
-}
-
-export default Textfield
