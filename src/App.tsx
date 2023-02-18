@@ -1,32 +1,17 @@
-import { styled } from '@stitches/react'
 import { useState } from 'react'
 
+import * as styles from './App.css'
 import Renderer from './Renderer'
 import Button from './lib/98/Button'
 import Checkbox from './lib/98/Checkbox'
 import Frame from './lib/98/Frame'
-import Input_ from './lib/98/Input'
+import Input from './lib/98/Input'
 import Layer from './lib/98/Layer'
 import Textfield from './lib/98/Textfield'
 import type { ButtonProps } from './render/Dialog'
 import Dialog from './render/Dialog'
 
-const InputSet = styled('div', {
-  '& + &': {
-    marginTop: 12,
-  },
-})
-
-const Legend = styled('legend', {
-  background: '#c2c2c2',
-  padding: '0 3px',
-})
-
-const Input = styled(Input_, {
-  marginTop: 8,
-})
-
-const App: React.VFC = () => {
+const App: React.FC = () => {
   const [title, setTitle] = useState('프린터 설정 오류')
   const [icon, setIcon] = useState(new URL('./render/internet_connection.png', import.meta.url).href)
   const [content, setContent] = useState('갑수갑수김상수박박쓰')
@@ -57,7 +42,7 @@ const App: React.VFC = () => {
     >
       <div style={{ margin: '8px 8px 12px' }}>
         <Layer css={{ background: '#fff' }} depth="inset">
-          <Renderer css={{ height: 180 }}>
+          <Renderer className={styles.renderingArea}>
             <Dialog buttons={buttons} icon={icon} image={image} title={title}>
               {content}
             </Dialog>
@@ -65,16 +50,16 @@ const App: React.VFC = () => {
         </Layer>
         <Layer as="form" css={{ display: 'flex', columnGap: 12, marginTop: 12, padding: 12 }} depth="outset">
           <Layer as="fieldset" css={{ flexGrow: 1, padding: 12 }} depth="shallow">
-            <Legend>텍스트</Legend>
-            <InputSet>
+            <legend className={styles.legend}>텍스트</legend>
+            <div className={styles.inputSet}>
               <label htmlFor="title">제목</label>
-              <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-            </InputSet>
-            <InputSet>
+              <Input className={styles.input} id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+            </div>
+            <div className={styles.inputSet}>
               <label htmlFor="icon">아이콘 (16×16)</label>
-              <Input id="icon" value={icon} onChange={(e) => setIcon(e.target.value)} />
-            </InputSet>
-            <InputSet>
+              <Input className={styles.input} id="icon" value={icon} onChange={(e) => setIcon(e.target.value)} />
+            </div>
+            <div className={styles.inputSet}>
               <label htmlFor="content">내용</label>
               <Textfield
                 css={{ height: 128, marginTop: 8 }}
@@ -82,18 +67,18 @@ const App: React.VFC = () => {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
-            </InputSet>
-            <InputSet>
+            </div>
+            <div className={styles.inputSet}>
               <label htmlFor="image">이미지 (32×32)</label>
-              <Input id="image" value={image} onChange={(e) => setImage(e.target.value)} />
-            </InputSet>
+              <Input className={styles.input} id="image" value={image} onChange={(e) => setImage(e.target.value)} />
+            </div>
           </Layer>
           <Layer as="fieldset" css={{ flexGrow: 1, margin: 0, padding: 12 }} depth="shallow">
-            <Legend>버튼</Legend>
+            <legend className={styles.legend}>버튼</legend>
             {buttons.map((button, index) => (
               <Layer key={index} as="fieldset" css={{ margin: '8px 0 0', padding: 12 }} depth="shallow">
-                <Legend>{button.label || `${index + 1}번`}</Legend>
-                <InputSet>
+                <legend className={styles.legend}>{button.label || `${index + 1}번`}</legend>
+                <div className={styles.inputSet}>
                   <label htmlFor={`label-${index}`}>레이블</label>
                   <Input
                     id={`label-${index}`}
@@ -102,8 +87,8 @@ const App: React.VFC = () => {
                       setButtons(buttons.map((b, i) => (i === index ? { ...b, label: e.target.value } : b)))
                     }
                   />
-                </InputSet>
-                <InputSet>
+                </div>
+                <div className={styles.inputSet}>
                   <label htmlFor={`shortcut-${index}`}>단축키</label>
                   <Input
                     id={`shortcut-${index}`}
@@ -112,8 +97,8 @@ const App: React.VFC = () => {
                       setButtons(buttons.map((b, i) => (i === index ? { ...b, shortcut: e.target.value[0] || '' } : b)))
                     }
                   />
-                </InputSet>
-                <InputSet>
+                </div>
+                <div className={styles.inputSet}>
                   <Checkbox
                     checked={button.disabled}
                     id={`disabled-${index}`}
@@ -122,7 +107,7 @@ const App: React.VFC = () => {
                       setButtons(buttons.map((b, i) => (i === index ? { ...b, disabled: e.target.checked } : b)))
                     }
                   />
-                </InputSet>
+                </div>
                 <Button
                   css={{ marginTop: 8 }}
                   disabled={buttons.length === 1}

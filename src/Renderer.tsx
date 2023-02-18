@@ -1,15 +1,16 @@
-import { Container, Sprite, Stage, Text } from '@pixi/react'
-import type { CSS } from '@stitches/react'
-import { styled } from '@stitches/react'
+import { Stage } from '@pixi/react'
+import clsx from 'clsx'
 import type { Application } from 'pixi.js'
 import { useEffect, useRef, useState } from 'react'
 
+import * as styles from './Renderer.css'
+
 type Props = {
   children?: React.ReactNode
-  css?: CSS
+  className?: string
 }
 
-const Renderer: React.FC<Props> = ({ children, css }) => {
+const Renderer: React.FC<Props> = ({ children, className }) => {
   const appRef = useRef<Application>()
   const hostRef = useRef<HTMLDivElement>(null)
 
@@ -30,7 +31,7 @@ const Renderer: React.FC<Props> = ({ children, css }) => {
   }, [])
 
   return (
-    <Host ref={hostRef} css={css}>
+    <div ref={hostRef} className={clsx(styles.host, className)}>
       {mounted && (
         <Stage
           {...dim}
@@ -41,14 +42,8 @@ const Renderer: React.FC<Props> = ({ children, css }) => {
           {children}
         </Stage>
       )}
-    </Host>
+    </div>
   )
 }
 
 export default Renderer
-
-const Host = styled('div', {
-  '& > canvas': {
-    display: 'block',
-  },
-})
