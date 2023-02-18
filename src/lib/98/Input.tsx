@@ -1,34 +1,14 @@
-import { styled } from '@stitches/react'
+import clsx from 'clsx'
 
-import Layer from './Layer'
+import * as styles from './Input.css'
+import * as layerStyles from './Layer.css'
 
 const Input: React.FC<Omit<JSX.IntrinsicElements['input'], 'ref'>> = ({ className, ...props }) => {
   return (
-    <Layer className={className} css={{ height: 21 }} depth="inset">
-      <InputField {...props} />
-    </Layer>
+    <div className={clsx(layerStyles.layer({ depth: 'inset' }), styles.root, className)}>
+      <input className={styles.input} {...props} />
+    </div>
   )
 }
 
 export default Input
-
-const InputField = styled('input', {
-  width: '100%',
-  height: '100%',
-  background: '#fff',
-  border: 'none',
-  display: 'block',
-  fontFamily: 'inherit',
-  fontSize: '12px',
-  lineHeight: 1,
-  padding: '1px 1px 4px',
-  '&:focus': {
-    outline: 'none',
-  },
-  '&:disabled, &:read-only': {
-    background: '#c2c2c2',
-  },
-  '&:disabled': {
-    color: '#7b7b7b',
-  },
-})

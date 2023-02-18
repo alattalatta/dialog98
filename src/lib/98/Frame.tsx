@@ -1,80 +1,42 @@
-import type { CSS } from '@stitches/react'
-import { styled } from '@stitches/react'
+import clsx from 'clsx'
 
-import { fakeBorder } from '../fakeBorder'
+import * as styles from './Frame.css'
 
 type Props = {
   active?: boolean
   as?: keyof JSX.IntrinsicElements
   children?: React.ReactNode
-  css?: CSS
+  className?: string
   icon?: string
   level?: 1 | 2 | 3
+  style?: React.CSSProperties
   title: string
   type: 'dialog' | 'window'
 }
 
-const Frame: React.FC<Props> = ({ active = true, children, as, css, icon, level = 1, title, type }) => {
+const Frame: React.FC<Props> = ({
+  active = true,
+  as: Root = 'article',
+  children,
+  className,
+  icon,
+  level = 1,
+  style,
+  title,
+  type,
+}) => {
+  const Heading = `h${level}` as const
+
   return (
-    <FrameRoot as={as} css={css} type={type}>
-      <TitleBar active={active}>
-        {icon && <Icon alt="" src={icon} />}
-        <Title as={`h${level}`}>{title}</Title>
-      </TitleBar>
+    <Root className={clsx(styles.root({ type }), className)} style={style}>
+      <header className={styles.titleBar({ active })}>
+        {icon && <img alt="" className={styles.icon} src={icon} />}
+        <Heading className={styles.title}>{title}</Heading>
+      </header>
       {children}
-    </FrameRoot>
+    </Root>
   )
 }
 
-export type { Props }
+export type { Props as FrameProps }
 export default Frame
-
-const FrameRoot = styled('article', {
-  background: '#c2c2c2',
-  border: '1px solid #c2c2c2',
-  borderRightColor: '#000',
-  borderBottomColor: '#000',
-  boxShadow: fakeBorder('#fff', '#7b7b7b'),
-  userSelect: 'none',
-  variants: {
-    type: {
-      dialog: {
-        padding: '2px',
-      },
-      window: {
-        padding: '3px',
-      },
-    },
-  },
-})
-
-const TitleBar = styled('header', {
-  display: 'flex',
-  padding: '1px 2px',
-  variants: {
-    active: {
-      true: {
-        background: '#00007b',
-        color: '#fff',
-      },
-      false: {
-        background: '#7b7b7b',
-        color: '#c2c2c2',
-      },
-    },
-  },
-})
-
-const Icon = styled('img', {
-  width: 16,
-  height: 16,
-  imageRendering: 'pixelated',
-  marginRight: 3,
-})
-
-const Title = styled('h1', {
-  fontSize: '1rem',
-  fontWeight: 400,
-  margin: 0,
-  padding: '2px 0',
-})

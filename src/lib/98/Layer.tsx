@@ -1,47 +1,17 @@
-import type { CSS } from '@stitches/react'
-import { styled } from '@stitches/react'
+import clsx from 'clsx'
 
-import { fakeBorder } from '../fakeBorder'
+import * as styles from './Layer.css'
 
-const baseCSS: CSS = {
-  border: '1px solid',
-  padding: 1,
+type Props = {
+  as?: keyof JSX.IntrinsicElements
+  children: React.ReactNode
+  className?: string
+  depth: 'inset' | 'outset' | 'shallow'
+  style: React.CSSProperties
 }
 
-const insetCSS: CSS = {
-  borderColor: '#7b7b7b',
-  borderRightColor: '#fff',
-  borderBottomColor: '#fff',
-  boxShadow: fakeBorder('#000', '#c2c2c2'),
+const Layer: React.FC<Props> = ({ as: Root = 'div', className, depth, ...props }) => {
+  return <Root className={clsx(styles.layer({ depth }), className)} {...props} />
 }
 
-const outsetCSS: CSS = {
-  borderColor: '#fff',
-  borderRightColor: '#000',
-  borderBottomColor: '#000',
-  boxShadow: fakeBorder('#c2c2c2', '#7b7b7b'),
-}
-
-const shallowCSS: CSS = {
-  borderColor: '#7b7b7b',
-  borderRightColor: '#fff',
-  borderBottomColor: '#fff',
-  boxShadow: fakeBorder('#fff', '#7b7b7b'),
-}
-
-const Layer = styled('div', {
-  ...baseCSS,
-  variants: {
-    depth: {
-      inset: insetCSS,
-      outset: outsetCSS,
-      shallow: shallowCSS,
-    },
-  },
-  defaultVariants: {
-    depth: 'outset',
-  },
-})
-
-export { baseCSS, insetCSS, outsetCSS, shallowCSS }
 export default Layer

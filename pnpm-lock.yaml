@@ -7,11 +7,11 @@ specifiers:
   '@parcel/config-default': '2.7'
   '@parcel/core': '2.7'
   '@pixi/react': '7'
-  '@stitches/react': ^1.2.6
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.11
   '@vanilla-extract/css': ^1.9.5
   '@vanilla-extract/parcel-transformer': ^1.0.0
+  '@vanilla-extract/recipes': ^0.3.0
   clsx: ^1.2.1
   eslint: ^8.34.0
   parcel: '2.7'
@@ -26,8 +26,8 @@ specifiers:
 dependencies:
   '@babel/runtime': 7.20.13
   '@pixi/react': 7.0.2_mymebykhzlyoqbu45hbzkr4jfq
-  '@stitches/react': 1.2.8_react@18.2.0
   '@vanilla-extract/css': 1.9.5
+  '@vanilla-extract/recipes': 0.3.0_@vanilla-extract+css@1.9.5
   clsx: 1.2.1
   pixi.js: 7.1.2
   process: 0.11.10
@@ -1646,14 +1646,6 @@ packages:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: true
 
-  /@stitches/react/1.2.8_react@18.2.0:
-    resolution: {integrity: sha512-9g9dWI4gsSVe8bNLlb+lMkBYsnIKCZTmvqvDG+Avnn69XfmHZKiaMrx7cgTaddq7aTPPmXiTsbFcUy0xgI4+wA==}
-    peerDependencies:
-      react: '>= 16.3.0'
-    dependencies:
-      react: 18.2.0
-    dev: false
-
   /@swc/helpers/0.4.14:
     resolution: {integrity: sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw==}
     dependencies:
@@ -1899,6 +1891,14 @@ packages:
 
   /@vanilla-extract/private/1.0.3:
     resolution: {integrity: sha512-17kVyLq3ePTKOkveHxXuIJZtGYs+cSoev7BlP+Lf4916qfDhk/HBjvlYDe8egrea7LNPHKwSZJK/bzZC+Q6AwQ==}
+
+  /@vanilla-extract/recipes/0.3.0_@vanilla-extract+css@1.9.5:
+    resolution: {integrity: sha512-7wXrgfq1oldKdBfCKen4XmSlDmQR+4o0CQ3WnnLfhQaEtI65xJ774yyQF6dD2CC+hHdW2LFKVXgH5NZRbMQ8Sg==}
+    peerDependencies:
+      '@vanilla-extract/css': ^1.0.0
+    dependencies:
+      '@vanilla-extract/css': 1.9.5
+    dev: false
 
   /abortcontroller-polyfill/1.7.5:
     resolution: {integrity: sha512-JMJ5soJWP18htbbxJjG7bG6yuI6pRhgJ0scHHTfkUjf6wjP912xZWvM+A4sJK3gqd9E8fcPbDnOefbA9Th/FIQ==}

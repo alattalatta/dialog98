@@ -35,21 +35,21 @@ const App: React.FC = () => {
 
   return (
     <Frame
-      css={{ maxWidth: 800, margin: '16px auto 0' }}
+      style={{ maxWidth: 800, margin: '16px auto 0' }}
       icon="https://win98icons.alexmeub.com/icons/png/recycle_bin_empty_cool-4.png"
       title="대화상자 98"
       type="dialog"
     >
       <div style={{ margin: '8px 8px 12px' }}>
-        <Layer css={{ background: '#fff' }} depth="inset">
+        <Layer style={{ background: '#fff' }} depth="inset">
           <Renderer className={styles.renderingArea}>
             <Dialog buttons={buttons} icon={icon} image={image} title={title}>
               {content}
             </Dialog>
           </Renderer>
         </Layer>
-        <Layer as="form" css={{ display: 'flex', columnGap: 12, marginTop: 12, padding: 12 }} depth="outset">
-          <Layer as="fieldset" css={{ flexGrow: 1, padding: 12 }} depth="shallow">
+        <Layer as="form" style={{ display: 'flex', columnGap: 12, marginTop: 12, padding: 12 }} depth="outset">
+          <Layer as="fieldset" style={{ flexGrow: 1, padding: 12 }} depth="shallow">
             <legend className={styles.legend}>텍스트</legend>
             <div className={styles.inputSet}>
               <label htmlFor="title">제목</label>
@@ -62,8 +62,8 @@ const App: React.FC = () => {
             <div className={styles.inputSet}>
               <label htmlFor="content">내용</label>
               <Textfield
-                css={{ height: 128, marginTop: 8 }}
                 id="content"
+                style={{ height: 128, marginTop: 8 }}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
@@ -73,10 +73,10 @@ const App: React.FC = () => {
               <Input className={styles.input} id="image" value={image} onChange={(e) => setImage(e.target.value)} />
             </div>
           </Layer>
-          <Layer as="fieldset" css={{ flexGrow: 1, margin: 0, padding: 12 }} depth="shallow">
+          <Layer as="fieldset" style={{ flexGrow: 1, margin: 0, padding: 12 }} depth="shallow">
             <legend className={styles.legend}>버튼</legend>
             {buttons.map((button, index) => (
-              <Layer key={index} as="fieldset" css={{ margin: '8px 0 0', padding: 12 }} depth="shallow">
+              <Layer key={index} as="fieldset" style={{ margin: '8px 0 0', padding: 12 }} depth="shallow">
                 <legend className={styles.legend}>{button.label || `${index + 1}번`}</legend>
                 <div className={styles.inputSet}>
                   <label htmlFor={`label-${index}`}>레이블</label>
@@ -109,8 +109,8 @@ const App: React.FC = () => {
                   />
                 </div>
                 <Button
-                  css={{ marginTop: 8 }}
                   disabled={buttons.length === 1}
+                  style={{ marginTop: 12 }}
                   type="button"
                   onClick={() => setButtons(buttons.filter((_, i) => i !== index))}
                 >
@@ -138,7 +138,7 @@ const App: React.FC = () => {
                 ))}
               </select>
             </div>
-            <Button css={{ marginTop: 12 }} type="button" onClick={addButton}>
+            <Button style={{ marginTop: 12 }} type="button" onClick={addButton}>
               버튼 추가
             </Button>
           </Layer>
